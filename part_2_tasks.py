@@ -37,16 +37,28 @@ def working_date_generator():
         now += timedelta(days=1)
 
 
+def print_object_info(obj):
+    callable_items = []
+    for item_name in dir(obj):
+        item = getattr(obj, item_name)
+        print item
+        if callable(item):
+            callable_items.append(item)
+        print help(item)
+
+    print callable_items
+
+
 if __name__ == '__main__':
     print generate_ascii_list()
     print generate_ascii_codes_map()
     print filter_word_list(['ala', 'maaaaaaaaa', 'kota'])
-    
+
     print generate_squers()
     print generate_squers_map()
 
-    d = working_date_generator()
-    for x in range(10):
-        day = d.next()
+    days_gen = working_date_generator()
+    for i in range(10):
+        day = days_gen.next()
         print '{}: {}'.format(day, day.weekday())
 
